@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+
+input[type=text], select, input[type=password], input[type=email] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+    max-height: 100vh;
+}
+.hide{
+    display: none;
+ height: 1vh;
+ margin-top: -50px;
+}
+</style>
+
+</head>
+<body>
+
+<div>
+  <form id ="mainform" action="#" method="POST">
+    <label for="fname"> Name:</label>
+    <input type="text" id="fname" name="firstname" placeholder="name" />
+    <div id="a" class="hide"></div>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" placeholder="email"/>
+    <div id="b" class="hide"></div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="password">
+            <div id="c" class="hide"></div>
+
+        
+            <label for="cpassword">Password confirm:</label>
+            <input type="password" id="cpassword" name="cpassword" placeholder="confirm password"/>
+            <div id="d" class="hide"></div>
+
+
+              
+        <label for="Birthday" class="control-label">Birthday:</label>
+        <input type="text" id="Birthday" name="birthday" v-model="user.birthday" placeholder="your age" style="text-align: right;"/>
+        <div id="e" class="hide"></div>
+
+
+
+    <label for="websit">Websit:</label>
+    <input type="text" id="websit" name="websit" placeholder="website"/>
+    <div id="f" class="hide"></div>
+
+
+    <input type="submit" value="Submit" id="sub-btn">
+  </form>
+</div>
+<script>
+var formElement=document.getElementById("mainform");
+var aname=document.getElementById("a");
+var bemail=document.getElementById("b");
+var cpass=document.getElementById("c");
+var ccpass=document.getElementById("d");
+var ebirth=document.getElementById("e");
+var fweb=document.getElementById("f");
+var letters = /^[A-Za-z]+$/;
+var formSubmit=document.getElementById("sub-btn");
+var pass=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+var passw = document.getElementById('password');
+var cpassw = document.getElementById('cpassword');
+var emailx = document.getElementById('email');
+var web= document.getElementById('websit');
+//var today = new Date();
+//var nowyear = today.getFullYear();
+//var nowmonth = today.getMonth();
+//var nowday = today.getDate();
+var age=document.getElementById('birthday');
+
+//var b = document.getElementById('birthday').value;
+//var birth = new Date(b);
+//var birthyear = birth.getFullYear();
+//var birthmonth = birth.getMonth();
+//var birthday = birth.getDate();
+//var age = nowyear - birthyear;
+//var age_month = nowmonth - birthmonth;
+//var age_day = nowday - birthday;
+var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+var pattern1 = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ //port
+            '(\\?[;&amp;a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i');
+
+formSubmit.addEventListener('click',function(v){
+    v.preventDefault();
+
+//name validation
+
+      if(fname.value == "" ){
+        aname.innerHTML="<p> This field can't be empty</p>"
+        aname.style.display='block';
+        aname.style.color='red';
+
+      }
+      else if(!fname.value.match(letters))
+      {
+        aname.innerHTML="<p> Please input alphabet characters only</p>"
+        aname.style.display='block';
+        aname.style.color='#800000';
+
+      }
+      else 
+      {
+
+
+      }
+   //email validation
+  if(emailx.value == "" ){
+      bemail.innerHTML="<p> please fill out this feild</p>"
+        bemail.style.display='block';
+        bemail.style.color='red';
+
+  }
+    else if (!emailx.value.match(pattern)){
+    bemail.innerHTML="<p>It dosent match email standard </p>"
+        bemail.style.display='block';
+        bemail.style.color='#800000';
+
+    }
+    else{}
+
+
+//passowrd check 
+if(passw.value == "" )
+{      cpass.innerHTML="<p> please fill out this feild</p>"
+        cpass.style.display='block';
+        cpass.style.color='red';
+
+        }
+else if (passw.value != cpassw.value || passw.value == "" || cpassw.value == ""){
+    cpass.innerHTML="<p> Please make a stronger password</p>"
+
+    ccpass.style.display='block';
+    ccpass.style.color='#800000';
+
+} else {
+
+
+}
+
+
+
+//password validation
+if(cpassw.value == "" )
+{      ccpass.innerHTML="<p> please fill out this feild</p>"
+        ccpass.style.display='block';
+        ccpass.style.color='red';
+
+        }
+       else if(!passw.value.match(cpassw)) 
+{
+    ccpass.innerHTML="<p>please match your password</p>"
+        ccpass.style.display='block'; 
+        ccpass.style.color='#800000';
+
+}
+else
+{ 
+ 
+
+}
+//birthday validation
+      // Birthday validation
+
+
+// Convert user entered age to a number
+
+age1 = parseInt(age, 18);
+
+
+//check if age is a number or less than or greater than 100
+
+ if (isNaN(age1) || age1 > 100 || age1=="")
+{ 
+    ebirth.innerHTML="<p>please fill out this feild correctly</p>"
+      ebirth.style.display='block';
+      ebirth.style.color='red';
+}
+else if (age1<18){
+    ebirth.innerHTML="<p>Age should be more than 18 years.Please enter a valid Date of Birth</p>"
+       ebirth.style.display='block';
+       ebirth.style.color='#800000';
+
+}
+else {}
+
+  //    if(age.value == "" )
+//{      ebirth.innerHTML="<p> please fill out this feild</p>"
+  //      ebirth.style.display='block';}
+//else if (age > 100) {
+  //  ebirth.innerHTML="<p>Age cannot be more than 100 Years.Please enter correct age</p>"
+    //    ebirth.style.display='block';
+
+//}
+//else if (age_month < 0 || (age_month == 0 && age_day < 0)) {
+  //  age = parseInt(age) - 1;
+//}
+//else if ((age == 18 && age_month <= 0 && age_day <= 0) || age < 18) {
+  //  ebirth.innerHTML="<p>Age should be more than 18 years.Please enter a valid Date of Birth</p>"
+    //    ebirth.style.display='block';
+
+//}
+//else{}
+
+
+
+
+  if(web.value == "" ){
+    fweb.innerHTML="<p> please fill out this feild</p>"
+        fweb.style.display='block';
+        fweb.style.color='red';
+
+  }
+    else if(!web.value.match(pattern1))
+{
+    fweb.innerHTML="<p> please fill out this feild with link of websit</p>"
+    fweb.style.display='block';
+    fweb.style.color='#800000';
+
+}
+else {}
+formElement.formSubmit();
+
+})
+</script>
+
+</body>
+</html>
